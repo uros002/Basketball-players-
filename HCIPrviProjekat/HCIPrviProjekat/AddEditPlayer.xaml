@@ -1,0 +1,262 @@
+﻿<Window x:Class="HCIPrviProjekat.AddEditPlayer"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:fa5="http://schemas.fontawesome.com/icons/"
+        xmlns:wpf="http://schemas.xceed.com/wpf/xaml/toolkit"
+        xmlns:local="clr-namespace:HCIPrviProjekat"
+        xmlns:notifications="clr-namespace:Notification.Wpf.Controls;assembly=Notification.Wpf"
+        mc:Ignorable="d"
+        Title="AddEditPlayer" 
+         WindowStyle="None"
+        Background="Transparent"
+        SizeToContent="WidthAndHeight"
+        AllowsTransparency="True"
+        WindowStartupLocation="CenterScreen">
+    <Grid>
+
+        <notifications:NotificationArea
+            x:Name="WindowNotificationAreaAdd"
+            Panel.ZIndex="1000"
+            MaxItems="3"
+            Position="TopCenter" Margin="0,0,8,486" />
+
+        <Canvas Width="1000" Height="700">
+        <Path x:Name="UIPathMWADD"
+              Fill="#0b2838"
+              Stroke="#e89c31"
+              StrokeThickness ="2">
+            <Path.Data>
+                <PathGeometry>
+                    <PathFigure StartPoint="0, 0">
+                        <LineSegment Point="0,700"/>
+                        <LineSegment Point="1000,700"/>
+                        <LineSegment Point="1000,0"/>
+                        <LineSegment Point="0,0"/>
+                    </PathFigure>
+                </PathGeometry>
+            </Path.Data>
+        </Path>
+
+            <Image Source="C:\Users\User\source\repos\HCIPrviProjekat\HCIPrviProjekat\bin\Debug\Images\textura.jpg" Opacity="0.07"  Width="1000" Height="698" Stretch="Fill"/>
+
+            <Grid Width="1000" Height="700">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="3*"/>
+                <RowDefinition Height="6*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1.5*"/>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="*"/>
+
+            </Grid.ColumnDefinitions>
+            <StackPanel  Grid.Row="0" Grid.RowSpan="2" Grid.Column="0" Orientation="Vertical" Height="270" Margin="5 0" VerticalAlignment="Top">
+                <Image x:Name="PlayerImage" Height="200" Margin="10,10,10,10" Source="{Binding SelfPicture}" />
+
+
+                    <Button x:Name="btnAddImage" Content="Upload Image" Click="btnAddImage_Click"  Margin="10,0,10,0" Height="40" Cursor="Hand">
+                        <Button.Style>
+                            <Style TargetType="Button">
+                                <Setter Property="BorderThickness" Value="1"/>
+                                <Setter Property="FontSize" Value="18"/>
+                                <Setter Property="FontWeight" Value="Regular"/>
+                                <Setter Property="FontFamily" Value="Agency FB"/>
+                                <Setter Property="Background" Value="#e89c31"/>
+                                <Setter Property="Foreground" Value="White" />
+                                <Style.Triggers >
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="#ecad54"/>
+                                        <Setter Property="Foreground" Value="White"/>
+                                        <Setter Property="BorderThickness" Value="2"/>
+                                        <Setter Property="BorderBrush" Value="#ecad54"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Border CornerRadius="22" 
+                                    Background="{TemplateBinding Background}">
+                                    <ContentPresenter VerticalAlignment="Center"  HorizontalAlignment="Center"/>
+                                </Border>
+
+                            </ControlTemplate>
+
+                        </Button.Template>
+                    </Button>
+
+
+            </StackPanel>
+
+
+
+
+            <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="1" Margin="5 0">
+                <StackPanel Orientation="Vertical" Margin="10 0" VerticalAlignment="Center">
+                    <Label Content="Name:" Margin="0 5 0 5" FontSize="20" Height="50" Width="245" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Foreground="White"/>
+                        <TextBox  x:Name="tbPlayerNameEdit" Text="{Binding PlayerName}" VerticalAlignment="Center" FontSize="25" Height="50" Width="245" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Foreground="White" Background="#031b28" BorderThickness="3" BorderBrush="#04273a"/>
+                    <Label x:Name="lbErrorName" Height="28" Content="" Foreground="Red"  Width="245" />
+                </StackPanel>
+                <StackPanel Orientation="Vertical" Margin="10 0" VerticalAlignment="Center">
+                    <Label Content="Surame:" Margin="0 5 0 5" FontSize="20" Height="50" Width="245" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Foreground="White"/>
+                        <TextBox  x:Name="tbPlayerSurnameEdit" VerticalAlignment="Center" Text="{Binding Surname}" FontSize="25" Height="50" Width="245"  VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Foreground="White" Background="#031b28" BorderThickness="3" BorderBrush="#04273a"/>
+                    <Label x:Name="lbErrorSurname" Height="28" Content="" Foreground="Red"  Width="245" />
+                </StackPanel>
+            </StackPanel>
+
+            <StackPanel Orientation="Vertical" Margin="10 0" VerticalAlignment="Center" Grid.Column="2" Grid.Row="0">
+                <Label Content="JerseyNum:" Margin="0 5 0 5" FontSize="20" Height="50" Width="120" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Foreground="White"/>
+                    <TextBox Grid.Row="0" Grid.Column="2" x:Name="tbPlayerJerseyNumEdit" Text="{Binding JerseyNumber}" VerticalAlignment="Center" Margin="10 0 10 0" FontSize="25" Height="50" Width="120"  VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Foreground="White" Background="#031b28" BorderThickness="3" BorderBrush="#04273a"/>
+                <Label x:Name="lbErrorJerseyNumber" Height="28" Content="" Width="120" Foreground="Red"/>
+            </StackPanel>
+            <StackPanel Orientation="Vertical"  Grid.Row="1" Grid.RowSpan="2" Grid.Column="0" Margin="5 80 5 35">
+                    <TextBox  x:Name="TBBasicInfoEdit"  Height="305" TextWrapping="Wrap" AcceptsTab="True" AcceptsReturn="True" Text="{Binding BasicInfo}" Foreground="White" Background="#031b28" BorderThickness="3" BorderBrush="#04273a" />
+                <Label x:Name="lbErrorBasicInfo" Height="28" Content="" Margin="0 5 0 0" Foreground="Red"/>
+            </StackPanel>
+            <DockPanel Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2">
+                    <ToolBar DockPanel.Dock="Top" x:Name="RTBToolBar" Background="#f7ebd9" Margin="5 0 10 0">
+                    <ToggleButton 
+                        x:Name="BoldToggleButton" 
+                        ToolTip="Bold"
+                        Command="EditingCommands.ToggleBold" Margin="5 0 0 0">
+
+                        <fa5:SvgAwesome Height="15"
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center" Foreground="Black"
+                                        Icon="Solid_Bold"/>
+                    </ToggleButton>
+
+                    
+
+                    
+
+                    <Separator Margin="7 0" Background="white"/>
+
+                    <ToggleButton x:Name="ItalicToggleButton" ToolTip="Italic"
+                                  Command="EditingCommands.ToggleItalic" >
+                        <fa5:SvgAwesome Icon="Solid_Italic" Height="15"
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center"
+                                        Foreground="Black"/>
+                    </ToggleButton>
+
+                    <Separator Margin="7 0"/>
+
+                    <ToggleButton x:Name="UnderlineToggleButton" ToolTip="Underline"
+                                  Command="EditingCommands.ToggleUnderline" >
+                        <fa5:SvgAwesome Icon="Solid_Underline" Height="15"
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center"
+                                        Foreground="Black"/>
+                    </ToggleButton>
+
+                    <Separator Margin="7 0"/>
+
+                        <ComboBox
+                        x:Name="FontFamilyComboBox"
+                        Width="250"
+                        IsTextSearchEnabled="True"
+                        IsTextSearchCaseSensitive="False"
+                        SelectionChanged="FontFamilyComboBox_SelectionChanged"/>
+
+                        <Separator Margin="7 0"/>
+
+                        <ComboBox x:Name="FontSizeComboBox" Width="50"  IsTextSearchEnabled="True"
+                        IsTextSearchCaseSensitive="False"
+                        SelectionChanged="FontSizeComboBox_SelectionChanged"/>
+
+                    <Separator Margin="7 0"/>
+
+                    <Label Content="Color:"/>
+                    <wpf:ColorPicker x:Name="ColorSelection" SelectedColorChanged="ColorSelection_SelectedColorChanged" SelectedColor="{Binding SelectedColor}" DisplayColorTooltip="True" DisplayColorAndName="True"/>
+
+                    
+                    
+
+                </ToolBar>
+                <StackPanel Orientation="Vertical">
+                        <RichTextBox x:Name="RTBDetails" Margin="10 5 10 5" Height="350" VerticalScrollBarVisibility="Auto" SelectionChanged="RTBDetails_SelectionChanged" TextChanged="RTBDetails_TextChanged" SizeChanged="RTBDetails_SizeChanged" BorderBrush="#ac7725" BorderThickness="2" Background="#f7ebd9"/>
+                        <StatusBar Height="20" Width="75" HorizontalAlignment="Left" Margin="10 0" Background="#0b2838">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Words: " FontSize="12" Foreground="White"/>
+                            <TextBlock x:Name="WordsNumber" Text = "{Binding NumberOfWords}" FontSize="12" Width="25" Foreground="White"/>
+                        </StackPanel>
+                    </StatusBar>
+                </StackPanel>
+            </DockPanel>
+
+
+            <Button x:Name="BtnConfirm" Grid.Row="4" Grid.ColumnSpan="3" VerticalAlignment="Center" HorizontalAlignment="Center" Height="35" Width="155" Margin="0 5 0 10"  Content="Confirm" Cursor="Hand" Click="BtnConfirm_Click">
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="BorderThickness" Value="1"/>
+                            <Setter Property="FontSize" Value="25"/>
+                            <Setter Property="FontWeight" Value="SemiBold"/>
+                            <Setter Property="FontFamily" Value="Agency FB"/>
+                            <Setter Property="Background" Value="#8c0e0f"/>
+                            <Setter Property="Foreground" Value="White" />
+                            <Style.Triggers >
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="White"/>
+                                    <Setter Property="Foreground" Value="#8c0e0f"/>
+                                    <Setter Property="BorderThickness" Value="2"/>
+                                    <Setter Property="BorderBrush" Value="#8c0e0f"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                    <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Border CornerRadius="22" 
+                                Background="{TemplateBinding Background}">
+                            <ContentPresenter VerticalAlignment="Center"  HorizontalAlignment="Center"/>
+                        </Border>
+
+                    </ControlTemplate>
+
+                </Button.Template>
+            </Button>
+
+
+            <Button x:Name="BtnBack" Grid.Row="4" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center" Height="35" Width="155" Margin="0 5 0 10"  Content="BACK" Cursor="Hand" Click="BtnBack_Click">
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="BorderThickness" Value="1"/>
+                        <Setter Property="FontSize" Value="25"/>
+                        <Setter Property="FontWeight" Value="SemiBold"/>
+                        <Setter Property="FontFamily" Value="Agency FB"/>
+                            <Setter Property="Background" Value="#8c0e0f"/>
+                        <Setter Property="Foreground" Value="White" />
+                        <Style.Triggers >
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="White"/>
+                                    <Setter Property="Foreground" Value="#8c0e0f"/>
+                                <Setter Property="BorderThickness" Value="2"/>
+                                    <Setter Property="BorderBrush" Value="#8c0e0f"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Border CornerRadius="22" 
+                                Background="{TemplateBinding Background}">
+                            <ContentPresenter VerticalAlignment="Center"  HorizontalAlignment="Center"/>
+                        </Border>
+
+                    </ControlTemplate>
+
+                </Button.Template>
+            </Button>
+
+
+        </Grid>
+        
+        
+    </Canvas>
+    </Grid>
+</Window>

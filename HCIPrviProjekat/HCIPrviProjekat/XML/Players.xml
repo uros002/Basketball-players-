@@ -1,0 +1,87 @@
+<?xml version="1.0"?>
+<ArrayOfPlayer xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Player>
+    <IsChecked>false</IsChecked>
+    <FullName>Javonte Smart</FullName>
+    <SelfPicture>C:\Users\User\source\repos\HCIPrviProjekat\HCIPrviProjekat\bin\Debug\Images\Smart.png</SelfPicture>
+    <JerseyNumber>1</JerseyNumber>
+    <BirthDate>1999-06-03T00:00:00</BirthDate>
+    <ObjectCreationDate>2024-03-21T20:07:21.0028036+01:00</ObjectCreationDate>
+    <BirthDateToDisplay>6/3/1999</BirthDateToDisplay>
+    <BasicInfo>Datum rođenja: 03.06.1999. godine
+	
+Mesto rođenja: Jackson Hole, Wyoming, U.S.
+
+Nacionalnost: Srbin
+
+Pozicija: bek
+
+Visina: 194cm
+
+Težina: 93kg</BasicInfo>
+    <PlayerInformation>C:\Users\User\source\repos\HCIPrviProjekat\HCIPrviProjekat\bin\Debug\rtfs\JavonteSmart.rtf</PlayerInformation>
+  </Player>
+  <Player>
+    <IsChecked>false</IsChecked>
+    <FullName>Stefan Lazarevic</FullName>
+    <SelfPicture>C:\Users\User\source\repos\HCIPrviProjekat\HCIPrviProjekat\bin\Debug\Images\Lazarevic.png</SelfPicture>
+    <JerseyNumber>2</JerseyNumber>
+    <BirthDate>1996-08-20T00:00:00</BirthDate>
+    <ObjectCreationDate>2024-03-21T20:05:04.6367833+01:00</ObjectCreationDate>
+    <BirthDateToDisplay>8/20/1996</BirthDateToDisplay>
+    <BasicInfo>Datum rođenja: 20.08.1996. godine
+
+Mesto rođenja: Beograd
+
+Nacionalnost: Srbin
+
+Pozicija: bek/krilo
+
+Visina: 198cm
+
+Težina: 100kg</BasicInfo>
+    <PlayerInformation>C:\Users\User\source\repos\HCIPrviProjekat\HCIPrviProjekat\bin\Debug\rtfs\StefanLazarevic.rtf</PlayerInformation>
+  </Player>
+  <Player>
+    <IsChecked>false</IsChecked>
+    <FullName>Milos Teodosic</FullName>
+    <SelfPicture>file:///C:/Users/User/source/repos/HCIPrviProjekat/HCIPrviProjekat/bin/Debug/Images/MilosTeodosic2.png</SelfPicture>
+    <JerseyNumber>4</JerseyNumber>
+    <BirthDate>1987-03-19T00:00:00</BirthDate>
+    <ObjectCreationDate>2024-03-21T20:04:13</ObjectCreationDate>
+    <BirthDateToDisplay>3/19/1987</BirthDateToDisplay>
+    <BasicInfo>Datum rođenja: 19.03.1987.
+
+Mesto Rođenja: Valjevo, Srbija
+
+Nacionalnost: Srbin
+
+Pozicija u timu: bek
+
+Visina: 196 cm
+
+Težina: 90kg</BasicInfo>
+    <PlayerInformation>C:\Users\User\source\repos\HCIPrviProjekat\HCIPrviProjekat\bin\Debug\rtfs\MilosTeodosic.rtf</PlayerInformation>
+  </Player>
+  <Player>
+    <IsChecked>false</IsChecked>
+    <FullName>Nemanja Nedović</FullName>
+    <SelfPicture>file:///C:/Users/User/source/repos/HCIPrviProjekat/HCIPrviProjekat/bin/Debug/Images/NemanjaNedovic.png</SelfPicture>
+    <JerseyNumber>26</JerseyNumber>
+    <BirthDate>1991-06-16T00:00:00</BirthDate>
+    <ObjectCreationDate>2024-03-21T20:20:59.38669+01:00</ObjectCreationDate>
+    <BirthDateToDisplay>6/16/1991</BirthDateToDisplay>
+    <BasicInfo>Datum rođenja: 16.06.1991.godine
+
+Mesto rođenja: Nova Varoš
+
+Nacionalnost: Srbin
+
+Pozicija: bek/plejmejker
+
+Visina: 192cm
+
+Težina: 88kg</BasicInfo>
+    <PlayerInformation>C:\Users\User\source\repos\HCIPrviProjekat\HCIPrviProjekat\bin\Debug\rtfs\NemanjaNedović.rtf</PlayerInformation>
+  </Player>
+</ArrayOfPlayer>
