@@ -127,7 +127,9 @@
                 <DataGrid x:Name="PlayersDataGrid" Grid.Row="1" Grid.RowSpan="3" Grid.ColumnSpan="3" Grid.Column="0" Margin="10 0 10 0" AutoGenerateColumns="False" 
                             ScrollViewer.CanContentScroll="True" 
                             ScrollViewer.VerticalScrollBarVisibility="Auto"
-                            
+                            CanUserAddRows="False"
+                          CanUserResizeColumns="False"
+                          CanUserResizeRows="False"
                             ItemsSource = "{Binding Players}" FontSize="18" SelectionChanged="PlayersDataGrid_SelectionChanged" Background="#6b4b17" BorderBrush="#2b1e09" IsReadOnly="{Binding IsReadOnlyDataGrid}"  >
                     <DataGrid.CellStyle>
                         <Style TargetType="DataGridCell">
@@ -137,7 +139,7 @@
                                 </Trigger>
                             </Style.Triggers>
                             <Setter Property="Background" Value="#6b4b17"/>
-                            <Setter Property="BorderBrush" Value="White"/>
+                            <Setter Property="BorderBrush" Value="#d49837"/>
                             <Setter Property="Foreground" Value="White"/>
                         </Style>
                     </DataGrid.CellStyle>
@@ -155,14 +157,14 @@
                             <Setter Property="Background" Value="#6b4b17"/>
                             <Setter Property="Foreground" Value="White" />
                             <Setter Property="SeparatorVisibility" Value="Visible"/>
-                            <Setter Property="SeparatorBrush" Value="White"/>
+                            <Setter Property="SeparatorBrush" Value="#d49837"/>
                             <Setter Property="HorizontalAlignment" Value="Center"/>
                         </Style>
                     </DataGrid.ColumnHeaderStyle>
 
                     
                     <DataGrid.Columns>
-                        <DataGridCheckBoxColumn Binding="{Binding IsChecked}"/>
+                        <DataGridCheckBoxColumn Binding="{Binding IsChecked}" x:Name="CheckBoxDataGrid"/>
                         <DataGridTemplateColumn Header="Picture">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
@@ -180,7 +182,7 @@
                                                 <Style.Triggers>
                                                     <Trigger Property="IsMouseOver" Value="True">
                                                         <Setter Property="Foreground" Value="white"/>
-                                                        <!-- Boja teksta kada se pređe preko linka -->
+                                                        
                                                     </Trigger>
 
                                                 </Style.Triggers>
@@ -203,7 +205,7 @@
                                 </Style>
                             </DataGridTextColumn.ElementStyle>
                         </DataGridTextColumn>
-                        <DataGridTextColumn Header="Datum rodjenja" Binding="{Binding BirthDateToDisplay}"  Width="200" IsReadOnly="True">
+                        <DataGridTextColumn Header="Date of birth" Binding="{Binding BirthDateToDisplay}"  Width="200" IsReadOnly="True">
                             <DataGridTextColumn.ElementStyle>
                                 <Style TargetType="TextBlock">
                                     <Setter Property="HorizontalAlignment" Value="Center"/>
@@ -211,7 +213,7 @@
                                 </Style>
                             </DataGridTextColumn.ElementStyle>
                         </DataGridTextColumn>
-                        <DataGridTextColumn Header="Datum dodavanja" Binding="{Binding ObjectCreationDate}"  Width="225" IsReadOnly="True" >
+                        <DataGridTextColumn Header="Date of adding" Binding="{Binding ObjectCreationDate}"  Width="225" IsReadOnly="True" >
                             <DataGridTextColumn.ElementStyle>
                                 <Style TargetType="TextBlock">
                                     <Setter Property="HorizontalAlignment" Value="Center"/>

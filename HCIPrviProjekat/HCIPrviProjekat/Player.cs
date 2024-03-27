@@ -50,7 +50,7 @@ namespace HCIPrviProjekat
             SelfPicture = selfPicture;
             JerseyNumber = jerNo;
             BirthDate = date;
-            BirthDateToDisplay = date.ToLongDateString();
+            BirthDateToDisplay = date.ToShortDateString();
             BasicInfo = basicInfo;
             PlayerInformation = playerInfo;
             ObjectCreationDate = DateTime.Now;

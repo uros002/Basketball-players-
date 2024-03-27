@@ -16,6 +16,7 @@ using System.Collections.ObjectModel;
 using Notification.Wpf;
 using HCIPrviProjekat;
 using System.ComponentModel;
+using System.IO;
 
 namespace HCIPrviProjekat
 {
@@ -69,6 +70,8 @@ namespace HCIPrviProjekat
                 BtnAdd.Visibility = Visibility.Hidden;
                 BtnEdit.Visibility = Visibility.Hidden;
                 BtnDelete.Visibility = Visibility.Hidden;
+                CheckBoxDataGrid.Visibility = Visibility.Hidden;
+                
             }
             isAddButton = false;
 
@@ -126,6 +129,7 @@ namespace HCIPrviProjekat
         {
             if (selectedPlayer != null)
             {
+                isAddButton = false;
                 AddEditPlayer aep = new AddEditPlayer();
                 this.Hide();
                 aep.Show();
@@ -158,10 +162,17 @@ namespace HCIPrviProjekat
                 if (ap.IsChecked)
                 {
                     this.Players.Remove(ap);
+                    
+                    string filePath = "C:\\Users\\User\\source\\repos\\HCIPrviProjekat\\HCIPrviProjekat\\bin\\Debug\\rtfs\\" + ap.FullName.Trim().Split(' ')[0] + ap.FullName.Trim().Split(' ')[1] + ".rtf";
+                    if (File.Exists(filePath))
+                    {
+                        
+                        File.Delete(filePath);
+                        
+                    }
                 }
             }
 
-            
         }
 
         private void BtnLogOut_Click(object sender, RoutedEventArgs e)

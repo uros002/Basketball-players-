@@ -9,7 +9,7 @@
     <ObjectCreationDate>2024-03-21T20:07:21.0028036+01:00</ObjectCreationDate>
     <BirthDateToDisplay>6/3/1999</BirthDateToDisplay>
     <BasicInfo>Datum rođenja: 03.06.1999. godine
-	
+
 Mesto rođenja: Jackson Hole, Wyoming, U.S.
 
 Nacionalnost: Srbin
@@ -83,5 +83,89 @@ Visina: 192cm
 
 Težina: 88kg</BasicInfo>
     <PlayerInformation>C:\Users\User\source\repos\HCIPrviProjekat\HCIPrviProjekat\bin\Debug\rtfs\NemanjaNedović.rtf</PlayerInformation>
+  </Player>
+  <Player>
+    <IsChecked>false</IsChecked>
+    <FullName>Adam Hanga</FullName>
+    <SelfPicture>file:///C:/Users/User/source/repos/HCIPrviProjekat/HCIPrviProjekat/bin/Debug/Images/AdamHanga.png</SelfPicture>
+    <JerseyNumber>5</JerseyNumber>
+    <BirthDate>1987-03-21T00:00:00</BirthDate>
+    <ObjectCreationDate>2024-03-27T12:54:26.4593943+01:00</ObjectCreationDate>
+    <BirthDateToDisplay>3/21/1987</BirthDateToDisplay>
+    <BasicInfo>Datum rođenja:  21.03.1987.
+
+Mesto Rođenja: Budimpešta, Mađarska
+
+Nacionalnost: Mađar
+
+Pozicija u timu: krilo/bek
+
+Visina: 200 cm
+
+Težina: 96kg</BasicInfo>
+    <PlayerInformation>C:\Users\User\source\repos\HCIPrviProjekat\HCIPrviProjekat\bin\Debug\rtfs\AdamHanga.rtf</PlayerInformation>
+  </Player>
+  <Player>
+    <IsChecked>false</IsChecked>
+    <FullName>Dejan Davidovac</FullName>
+    <SelfPicture>file:///C:/Users/User/source/repos/HCIPrviProjekat/HCIPrviProjekat/bin/Debug/Images/DejanDavidovac.png</SelfPicture>
+    <JerseyNumber>7</JerseyNumber>
+    <BirthDate>1995-01-17T00:00:00</BirthDate>
+    <ObjectCreationDate>2024-03-27T13:05:21.3598929+01:00</ObjectCreationDate>
+    <BirthDateToDisplay>1/17/1995</BirthDateToDisplay>
+    <BasicInfo>Datum rođenja: 17.01.1995.
+
+Mesto Rođenja: Zrenjanin, Srbija
+
+Nacionalnost: Srbin
+
+Pozicija u timu: bek/krilo/krilni centar
+
+Visina: 202cm
+
+Težina: 95kg</BasicInfo>
+    <PlayerInformation>C:\Users\User\source\repos\HCIPrviProjekat\HCIPrviProjekat\bin\Debug\rtfs\DejanDavidovac.rtf</PlayerInformation>
+  </Player>
+  <Player>
+    <IsChecked>false</IsChecked>
+    <FullName>Luka Mitrović</FullName>
+    <SelfPicture>file:///C:/Users/User/source/repos/HCIPrviProjekat/HCIPrviProjekat/bin/Debug/Images/LukaMitrovic.png</SelfPicture>
+    <JerseyNumber>9</JerseyNumber>
+    <BirthDate>1993-03-21T00:00:00</BirthDate>
+    <ObjectCreationDate>2024-03-27T13:21:34.4776723+01:00</ObjectCreationDate>
+    <BirthDateToDisplay>3/21/1993</BirthDateToDisplay>
+    <BasicInfo>Datum rođenja: 21.03.1993.godine
+
+Mesto rođenja: Novi Sad
+
+Nacionalnost: Srbija
+
+Pozicija: krilni centar
+
+Visina: 206cm
+
+Težina: 102kg</BasicInfo>
+    <PlayerInformation>C:\Users\User\source\repos\HCIPrviProjekat\HCIPrviProjekat\bin\Debug\rtfs\LukaMitrović.rtf</PlayerInformation>
+  </Player>
+  <Player>
+    <IsChecked>false</IsChecked>
+    <FullName>Joel Bolomboy</FullName>
+    <SelfPicture>file:///C:/Users/User/source/repos/HCIPrviProjekat/HCIPrviProjekat/bin/Debug/Images/Bolomboj.png</SelfPicture>
+    <JerseyNumber>21</JerseyNumber>
+    <BirthDate>1994-01-28T00:00:00</BirthDate>
+    <ObjectCreationDate>2024-03-27T13:32:31.9037926+01:00</ObjectCreationDate>
+    <BirthDateToDisplay>1/28/1994</BirthDateToDisplay>
+    <BasicInfo>Datum rođenja: 28.01.1994.
+
+Mesto Rođenja: Donetsk, Ukraine
+
+Nacionalnost: SAD/Russia
+
+Pozicija u timu: Krilni centar/Centar
+
+Visina: 203cm
+
+Težina: 103kg</BasicInfo>
+    <PlayerInformation>C:\Users\User\source\repos\HCIPrviProjekat\HCIPrviProjekat\bin\Debug\rtfs\JoelBolomboy.rtf</PlayerInformation>
   </Player>
 </ArrayOfPlayer>

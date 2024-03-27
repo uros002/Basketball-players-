@@ -54,8 +54,9 @@
                 <ColumnDefinition Width="*"/>
 
             </Grid.ColumnDefinitions>
-            <StackPanel  Grid.Row="0" Grid.RowSpan="2" Grid.Column="0" Orientation="Vertical" Height="270" Margin="5 0" VerticalAlignment="Top">
-                <Image x:Name="PlayerImage" Height="200" Margin="10,10,10,10" Source="{Binding SelfPicture}" />
+                <Rectangle x:Name="RectangleImage" Stroke="Red" StrokeThickness="2" Grid.Column="0" Visibility="Hidden" />
+            <StackPanel  Grid.Row="0" Grid.RowSpan="2" Grid.Column="0" Orientation="Vertical" Height="290" Margin="5 0" VerticalAlignment="Top">
+                <Image x:Name="PlayerImage" Height="200" Margin="10,10,10,10"  />
 
 
                     <Button x:Name="btnAddImage" Content="Upload Image" Click="btnAddImage_Click"  Margin="10,0,10,0" Height="40" Cursor="Hand">
@@ -89,8 +90,9 @@
                         </Button.Template>
                     </Button>
 
+                    <Label x:Name="lbImageError"  Height="28" Content="" Margin="20 0"  Foreground="Red"  />
 
-            </StackPanel>
+                </StackPanel>
 
 
 
@@ -111,9 +113,9 @@
             <StackPanel Orientation="Vertical" Margin="10 0" VerticalAlignment="Center" Grid.Column="2" Grid.Row="0">
                 <Label Content="JerseyNum:" Margin="0 5 0 5" FontSize="20" Height="50" Width="120" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Foreground="White"/>
                     <TextBox Grid.Row="0" Grid.Column="2" x:Name="tbPlayerJerseyNumEdit" Text="{Binding JerseyNumber}" VerticalAlignment="Center" Margin="10 0 10 0" FontSize="25" Height="50" Width="120"  VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Foreground="White" Background="#031b28" BorderThickness="3" BorderBrush="#04273a"/>
-                <Label x:Name="lbErrorJerseyNumber" Height="28" Content="" Width="120" Foreground="Red"/>
+                <TextBlock x:Name="lbErrorJerseyNumber" Height="30" Text="" Width="120" TextWrapping="Wrap"  Foreground="Red"/>
             </StackPanel>
-            <StackPanel Orientation="Vertical"  Grid.Row="1" Grid.RowSpan="2" Grid.Column="0" Margin="5 80 5 35">
+            <StackPanel Orientation="Vertical"  Grid.Row="1" Grid.RowSpan="2" Grid.Column="0" Margin="5 105 5 35">
                     <TextBox  x:Name="TBBasicInfoEdit"  Height="305" TextWrapping="Wrap" AcceptsTab="True" AcceptsReturn="True" Text="{Binding BasicInfo}" Foreground="White" Background="#031b28" BorderThickness="3" BorderBrush="#04273a" />
                 <Label x:Name="lbErrorBasicInfo" Height="28" Content="" Margin="0 5 0 0" Foreground="Red"/>
             </StackPanel>
@@ -178,14 +180,15 @@
                     
 
                 </ToolBar>
-                <StackPanel Orientation="Vertical">
+                <StackPanel Orientation="Vertical" Height="400">
                         <RichTextBox x:Name="RTBDetails" Margin="10 5 10 5" Height="350" VerticalScrollBarVisibility="Auto" SelectionChanged="RTBDetails_SelectionChanged" TextChanged="RTBDetails_TextChanged" SizeChanged="RTBDetails_SizeChanged" BorderBrush="#ac7725" BorderThickness="2" Background="#f7ebd9"/>
-                        <StatusBar Height="20" Width="75" HorizontalAlignment="Left" Margin="10 0" Background="#0b2838">
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="Words: " FontSize="12" Foreground="White"/>
-                            <TextBlock x:Name="WordsNumber" Text = "{Binding NumberOfWords}" FontSize="12" Width="25" Foreground="White"/>
-                        </StackPanel>
-                    </StatusBar>
+                        <StatusBar Height="28" Width="587" HorizontalAlignment="Left" Margin="10 0" Background="#0b2838">
+                            <StackPanel Orientation="Horizontal" Height="30">
+                                <TextBlock Text="Words: " FontSize="12" Foreground="White"/>
+                                <TextBlock x:Name="WordsNumber" Text = "" FontSize="12" Width="25" Foreground="White"/>
+                                <Label x:Name="lbInformationError" Margin="50 0 0 0" HorizontalContentAlignment="Left" Content="" Foreground="Red" Width="587" FontSize="15" />
+                            </StackPanel>
+                        </StatusBar>
                 </StackPanel>
             </DockPanel>
 

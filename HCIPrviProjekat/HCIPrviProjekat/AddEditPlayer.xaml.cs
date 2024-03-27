@@ -197,7 +197,14 @@ namespace HCIPrviProjekat
 
             FontFamilyComboBox.ItemsSource = Fonts.SystemFontFamilies;
             FontSizeComboBox.ItemsSource = FontSizes;
+
+            FlowDocument fd = new FlowDocument();
+            
+
+            RTBDetails.Document = fd;
+
             NumberOfWords = 0;
+            WordsNumber.Text = NumberOfWords.ToString();
 
             AdminMainWindow adminWindow = AdminMainWindow.adminMainWindow;
             playerInfo = AdminMainWindow.selectedPlayer;
@@ -214,12 +221,10 @@ namespace HCIPrviProjekat
                 BasicInfo = playerInfo.BasicInfo;
 
                 
-                RTBDetails.Document =ReadFromRTF();
+                RTBDetails.Document = ReadFromRTF();
 
 
-                TextRange txtRange = new TextRange(RTBDetails.Document.ContentStart, RTBDetails.Document.ContentEnd);
-                string txt = txtRange.Text;
-                NumberOfWords = WordCounter(txt); 
+                WordCounter(RTBDetails.Document);
 
 
 
@@ -231,6 +236,7 @@ namespace HCIPrviProjekat
                 
                 PlayerImage.Source = bitmap;
             }
+
         }
 
 
@@ -276,6 +282,7 @@ namespace HCIPrviProjekat
 
         private void BtnBack_Click(object sender, RoutedEventArgs e)
         {
+            AdminMainWindow.adminMainWindow.isAddButton = false;
             AdminMainWindow.adminMainWindow.Show();
             this.Close();
         }
@@ -327,6 +334,11 @@ namespace HCIPrviProjekat
                 }
             }
 
+            object fontFamily = RTBDetails.Selection.GetPropertyValue(Inline.FontFamilyProperty);
+            FontFamilyComboBox.SelectedItem = fontFamily;
+
+            WordCounter(RTBDetails.Document);
+
         }
 
         private void ColorSelection_SelectedColorChanged(object sender, RoutedPropertyChangedEventArgs<Color?> e)
@@ -356,43 +368,50 @@ namespace HCIPrviProjekat
 
         private void RTBDetails_TextChanged(object sender, TextChangedEventArgs e)
         {
-            TextRange txtRange = new TextRange(RTBDetails.Document.ContentStart, RTBDetails.Document.ContentEnd);
-            string txt = txtRange.Text;
-            NumberOfWords = WordCounter(txt);
+           
+            WordCounter(RTBDetails.Document);
         }
 
         private void RTBDetails_SizeChanged(object sender, SizeChangedEventArgs e)
         {
-            TextRange txtRange = new TextRange(RTBDetails.Document.ContentStart, RTBDetails.Document.ContentEnd);
-            string txt = txtRange.ToString();
+            
 
-            NumberOfWords = WordCounter(txt);
+           WordCounter(RTBDetails.Document);
         }
 
         private void BtnConfirm_Click(object sender, RoutedEventArgs e)
         {
             if (ValidateInputData())
             {
-                try
-                {
+                //try
+                //{
                     int num = Int32.Parse(tbPlayerJerseyNumEdit.Text);
-                    lbErrorJerseyNumber.Content = string.Empty;
-                    tbPlayerJerseyNumEdit.BorderBrush = Brushes.LightSlateGray;
+                    //lbErrorJerseyNumber.Text = string.Empty;
+                    //tbPlayerJerseyNumEdit.BorderBrush = Brushes.LightSlateGray;
                     string fName = PlayerName + " " + Surname;
 
-                    WriteToRTF();
+                    //WriteToRTF();
                     string fullPath = rtfPath + PlayerName + Surname + ".rtf";
+                string firstName = "";
+                string firstSurname = "";
+                string firstfullPath = "";
+                bool isAdd = AdminMainWindow.adminMainWindow.isAddButton;
 
-                    bool isValid = true;
+                bool isValid = true;
 
 
-                    Player player = new Player(fName, SelfPicture, num, new DateTime(), BasicInfo, fullPath);
+                    Player player = new Player(fName, SelfPicture, num, DateOfBirthExtraction(), BasicInfo, fullPath);
 
                     List<Player> TempPlayers = AdminMainWindow.adminMainWindow.Players.ToList();
+
                     if (!AdminMainWindow.adminMainWindow.isAddButton) //ako je edit onda ovo
                     {
-                        int cnt = 0;
-                        player.BirthDate = DateOfBirthExtraction();
+
+                     firstName = playerInfo.FullName.Trim().Split(' ')[0];
+                     firstSurname = playerInfo.FullName.Trim().Split(' ')[1];
+                     firstfullPath = rtfPath + firstName + firstSurname + ".rtf";
+                    int cnt = 0;
+                       // player.BirthDate = DateOfBirthExtraction();
                         foreach (Player pl in TempPlayers)
                         {
                             
@@ -405,18 +424,25 @@ namespace HCIPrviProjekat
 
                         if (cnt == 1)
                         {
-                            foreach (Player pl in TempPlayers)
+                            if (DateOfBirthExtraction() == new DateTime(1900, 1, 1))
                             {
-                                int index = AdminMainWindow.adminMainWindow.Players.IndexOf(pl);
-
-                                if (pl.FullName.Equals(player.FullName) || pl.JerseyNumber == player.JerseyNumber)
+                                this.ShowToastNotification(new ToastNotification("Information", "You need to write Date of Birth in BasicInfo field! FORMAT: (Datum rođenja: DD.MM.YYYY.)!", NotificationType.Information));
+                            }
+                            else
+                            {
+                                foreach (Player pl in TempPlayers)
                                 {
-                                    player.ObjectCreationDate = pl.ObjectCreationDate;
-                                    
-                                    AdminMainWindow.adminMainWindow.Players.Remove(pl);
-                                    
-                                    AdminMainWindow.adminMainWindow.Players.Insert(index, player);
+                                    int index = AdminMainWindow.adminMainWindow.Players.IndexOf(pl);
 
+                                    if (pl.FullName.Equals(player.FullName) || pl.JerseyNumber == player.JerseyNumber)
+                                    {
+                                        player.ObjectCreationDate = pl.ObjectCreationDate;
+
+                                        AdminMainWindow.adminMainWindow.Players.Remove(pl);
+
+                                        AdminMainWindow.adminMainWindow.Players.Insert(index, player);
+
+                                    }
                                 }
                             }
                         }
@@ -429,88 +455,215 @@ namespace HCIPrviProjekat
                     }
                     else
                     {
-                        AdminMainWindow.adminMainWindow.Players.Add(player);
+                        bool addValid = true;
+
+                    {
+                        foreach (Player pl in TempPlayers)
+                        {
+
+                            if (pl.FullName.Equals(player.FullName) || pl.JerseyNumber == player.JerseyNumber)
+                            {
+                                addValid = false;
+                                isValid = false;
+                            }
+                        }
+                        if (addValid)
+                        {
+
+
+
+                            AdminMainWindow.adminMainWindow.isAddButton = false;
+
+                            AdminMainWindow.adminMainWindow.Players.Add(player);
+                            
+
+
+                        }
+                        else
+                        {
+                            this.ShowToastNotification(new ToastNotification("Error", "Pay attention not to overlap FullName of player or Jersey Number!", NotificationType.Error));
+                        }
+                    }
                     }
 
                     if (isValid)
                     {
 
-                        AdminMainWindow.adminMainWindow.Show();
+                    if (!isAdd)
+                    {
+
+                        if (firstName != player.FullName.Trim().Split(' ')[0] || firstSurname != player.FullName.Trim().Split(' ')[1])
+                        {
+
+                            Console.WriteLine("BRISIIII");
+
+                            File.Delete(firstfullPath);
+
+
+                        }
+                    }
+                    WriteToRTF(player.FullName.Trim().Split(' ')[0], player.FullName.Trim().Split(' ')[1]);
+
+                    AdminMainWindow.adminMainWindow.Show();
                         AdminMainWindow.adminMainWindow.ShowToastNotification(new ToastNotification("Success", "Your change has completed successfully", NotificationType.Success));
                         this.Close();
                     }
 
                     
-                }
-                catch (Exception exc)
-                {
-                    Console.WriteLine(exc.Message);
-                    lbErrorJerseyNumber.Content = "Please enter just numbers!";
-                    tbPlayerJerseyNumEdit.BorderBrush = Brushes.Red;
-                }
+                //}
+                //catch (Exception exc)
+                //{
+                //    Console.WriteLine(exc.Message);
+                //    lbErrorJerseyNumber.Content = "Please enter just numbers!";
+                //    tbPlayerJerseyNumEdit.BorderBrush = Brushes.Red;
+                //}
             }
         }
 
         private bool ValidateInputData()
         {
             bool isValid = true;
+            try
+            {
+
+               
+                if (tbPlayerNameEdit.Text.Trim().Equals(string.Empty))
+                {
+                    isValid = false;
+                    lbErrorName.Content = "Name field cannot be left empty!";
+                    tbPlayerNameEdit.BorderBrush = Brushes.Red;
+
+                }
+                else
+                {
+                    lbErrorName.Content = string.Empty;
+                    tbPlayerNameEdit.BorderBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#04273a"));
+                }
+
+                if (tbPlayerSurnameEdit.Text.Trim().Equals(string.Empty))
+                {
+                    isValid = false;
+                    lbErrorSurname.Content = "Surname field cannot be left empty!";
+                    tbPlayerSurnameEdit.BorderBrush = Brushes.Red;
+                }
+                else
+                {
+                    lbErrorSurname.Content = string.Empty;
+                    tbPlayerSurnameEdit.BorderBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#04273a"));
+                }
+
+               
+
+                if (TBBasicInfoEdit.Text.Trim().Equals(string.Empty))
+                {
+                    isValid = false;
+                    lbErrorBasicInfo.Content = "BasicInfo field cannot be left empty!";
+                    TBBasicInfoEdit.BorderBrush = Brushes.Red;
+                }
+                else
+                {
+                    lbErrorBasicInfo.Content = string.Empty;
+                    TBBasicInfoEdit.BorderBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#04273a"));
+                }
+
+                if (tbPlayerJerseyNumEdit.Text.Trim().Equals(string.Empty))
+                {
+                    isValid = false;
+                    lbErrorJerseyNumber.Text = "JerseyNumber field cannot be left empty!";
+                    tbPlayerJerseyNumEdit.BorderBrush = Brushes.Red;
+                }
+                else
+                {
+                    lbErrorJerseyNumber.Text = string.Empty;
+                    tbPlayerJerseyNumEdit.BorderBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#04273a"));
+                }
+
+                if (SelfPicture != string.Empty)
+                {
+                    lbImageError.Content = string.Empty;
+                    RectangleImage.Visibility = Visibility.Hidden;
+
+                }
+                else
+                {
+                    isValid = false;
+                    lbImageError.Content = "PlayerImage field cannot be left empty";
+                    RectangleImage.Visibility = Visibility.Visible;
+
+                }
 
 
-            if (tbPlayerNameEdit.Text.Trim().Equals(string.Empty))
-            {
-                isValid = false;
-                lbErrorName.Content = "Name field cannot be left empty!";
-                tbPlayerNameEdit.BorderBrush = Brushes.Red;
-            }
-            else
-            {
-                lbErrorName.Content = string.Empty;
-                tbPlayerNameEdit.BorderBrush = Brushes.LightSlateGray;
-            }
+                
 
-            if (tbPlayerSurnameEdit.Text.Trim().Equals(string.Empty))
-            {
-                isValid = false;
-                lbErrorSurname.Content = "Surname field cannot be left empty!";
-                tbPlayerSurnameEdit.BorderBrush = Brushes.Red;
-            }
-            else
-            {
-                lbErrorSurname.Content = string.Empty;
-                tbPlayerSurnameEdit.BorderBrush = Brushes.LightSlateGray;
-            }
+                if (RTBDetails.Document.Blocks.Count == 0)
+                {
+                    isValid = false;
+                    lbInformationError.Content = "Information field cannot be left empty";
+                    RTBDetails.BorderBrush = Brushes.Red;
 
-            if (tbPlayerJerseyNumEdit.Text.Trim().Equals(string.Empty))
+                }
+                else
+                {
+                    lbInformationError.Content = string.Empty;
+                    RTBDetails.BorderBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#ac7725")); 
+                }
+
+                int num = Int32.Parse(tbPlayerJerseyNumEdit.Text);
+
+                if(num < 0)
+                {
+                    isValid = false;
+                    lbErrorJerseyNumber.Text = "JerseyNumber must be positive!";
+                    tbPlayerJerseyNumEdit.BorderBrush = Brushes.Red;
+                }
+                else
+                {
+                    lbErrorJerseyNumber.Text = string.Empty;
+                    tbPlayerJerseyNumEdit.BorderBrush = Brushes.LightSlateGray;
+                    
+                }
+
+                if ((DateOfBirthExtraction() == new DateTime(1900, 1, 1)))
+                {
+                    this.ShowToastNotification(new ToastNotification("Information", "You need to write Date of Birth in BasicInfo field! FORMAT: (Datum rođenja: DD.MM.YYYY.)!", NotificationType.Information));
+                    isValid = false;
+                    Console.WriteLine(new DateTime(1900, 1, 1).ToString());
+                   
+                }
+               
+
+                TextRange txtRange = new TextRange(RTBDetails.Document.ContentStart, RTBDetails.Document.ContentEnd);
+                string txt = txtRange.Text;
+
+                if(RTBDetails.Document == null)
+                {
+                    isValid = false;
+                    lbInformationError.Content = "Information field cannot be left empty";
+                    lbInformationError.BorderBrush = Brushes.Red;
+                    
+                }
+                else
+                {
+                    lbInformationError.Content = string.Empty;
+                    lbInformationError.BorderBrush = Brushes.LightSlateGray;
+                }
+
+            }
+            catch (Exception exc)
             {
-                isValid = false;
-                lbErrorJerseyNumber.Content = "JerseyNumber field cannot be left empty!";
+                Console.WriteLine(exc.Message);
+                lbErrorJerseyNumber.Text = "Please enter just numbers!";
                 tbPlayerJerseyNumEdit.BorderBrush = Brushes.Red;
+                isValid = false;
             }
-            else
-            {
-                lbErrorJerseyNumber.Content = string.Empty;
-                tbPlayerJerseyNumEdit.BorderBrush = Brushes.LightSlateGray;
-            }
-
-            //if (tbBasicInfoEdit.Text.Trim().Equals(string.Empty))
-            //{
-            //    isValid = false;
-            //    lbErrorBasicInfo.Content = "BasicInfo field cannot be left empty!";
-            //    tbBasicInfoEdit.BorderBrush = Brushes.Red;
-            //}
-            //else
-            //{
-            //    lbErrorBasicInfo.Content = string.Empty;
-            //    tbBasicInfoEdit.BorderBrush = Brushes.LightSlateGray;
-            //}
 
             return isValid;
         }
 
-        private void WriteToRTF()
+        private void WriteToRTF(string name,string surname)
         {
             TextRange range = new TextRange(RTBDetails.Document.ContentStart, RTBDetails.Document.ContentEnd);
-            using (var stream = System.IO.File.Create(rtfPath + PlayerName + Surname + ".rtf"))
+            using (var stream = System.IO.File.Create(rtfPath + name + surname + ".rtf"))
             {
                 range.Save(stream, DataFormats.Rtf);
             }
@@ -540,13 +693,19 @@ namespace HCIPrviProjekat
         {
             try
             {
-                string[] line = BasicInfo.Split('\n');
+
+                string[] line = TBBasicInfoEdit.Text.Split('\n');
 
                 string[] dvotacka = line[0].Split(':');
 
-                string[] samoDatum = dvotacka[1].Trim().Split(' ');
+                //string[] samoDatum = dvotacka[1].Trim().Split(' ');
 
-                string[] datum = samoDatum[0].Trim().Split('.');
+                string[] datum = dvotacka[1].Trim().Split('.');
+
+                for(int i = 0; i < 3; i++)
+                {
+                    datum[i] = datum[i].Trim();
+                }
 
                 Console.WriteLine(datum[0] + datum[1] + datum[2]);
 
@@ -555,17 +714,25 @@ namespace HCIPrviProjekat
             catch(Exception excep)
             {
                 Console.WriteLine(excep.Message);
-                return new DateTime();
+                return new DateTime(1900,1,1);
             }
+
+            Console.WriteLine(new DateTime(1900, 1, 1).ToString());
         }
 
-        private int WordCounter(string txt)
+        private void WordCounter(FlowDocument doc)
         {
+
+            TextRange txtRange = new TextRange(doc.ContentStart,doc.ContentEnd);
+            string txt = txtRange.Text;
+
             Regex regex = new Regex(@"\b\w+\b");
 
             // Brojač reči
             int wordCount = regex.Matches(txt).Count;
-            return wordCount;
+            WordsNumber.Text = wordCount.ToString();
+            Console.WriteLine(wordCount.ToString());
+            //return wordCount;
         }
 
 
