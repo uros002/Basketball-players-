@@ -53,15 +53,15 @@ namespace HCIPrviProjekat
 
             if (Accounts == null)
             {
-                Console.WriteLine("NEMA NICEGAAAAAA");
+               // Console.WriteLine("NEMA NICEGAAAAAA");
             }
-            else
-            {
-                foreach (Account acc in Accounts)
-                {
-                    Console.WriteLine(acc.Username + " " + acc.Password + "");
-                }
-            }
+            //else
+            //{
+            //    foreach (Account acc in Accounts)
+            //    {
+            //        Console.WriteLine(acc.Username + " " + acc.Password + "");
+            //    }
+            //}
 
             TBUserName.Text = "Username";
             TBUserName.Foreground = Brushes.LightSlateGray;

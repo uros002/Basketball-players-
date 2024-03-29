@@ -414,14 +414,16 @@ namespace HCIPrviProjekat
                        // player.BirthDate = DateOfBirthExtraction();
                         foreach (Player pl in TempPlayers)
                         {
-                            
-                            if (pl.FullName.Equals(player.FullName) || pl.JerseyNumber == player.JerseyNumber)
+                        //Console.WriteLine("#######" + pl.FullName + pl.JerseyNumber.ToString());
+                        if (pl.FullName.Equals(player.FullName) || pl.JerseyNumber == player.JerseyNumber)
                             {
                                 cnt++;
                                 
                             }
                         }
 
+                    if (cnt <= 1)
+                    {
                         if (cnt == 1)
                         {
                             if (DateOfBirthExtraction() == new DateTime(1900, 1, 1))
@@ -434,6 +436,7 @@ namespace HCIPrviProjekat
                                 {
                                     int index = AdminMainWindow.adminMainWindow.Players.IndexOf(pl);
 
+
                                     if (pl.FullName.Equals(player.FullName) || pl.JerseyNumber == player.JerseyNumber)
                                     {
                                         player.ObjectCreationDate = pl.ObjectCreationDate;
@@ -441,18 +444,45 @@ namespace HCIPrviProjekat
                                         AdminMainWindow.adminMainWindow.Players.Remove(pl);
 
                                         AdminMainWindow.adminMainWindow.Players.Insert(index, player);
-
+                                        //Console.WriteLine("PROSAO SAM OVUDA");
                                     }
                                 }
                             }
                         }
-                        else
+                        else if (cnt == 0)
                         {
-                            this.ShowToastNotification(new ToastNotification("Error", "Pay attention not to overlap FullName of player or Jersey Number!", NotificationType.Error));
-                            isValid = false;
-                        }
+                            if (DateOfBirthExtraction() == new DateTime(1900, 1, 1))
+                            {
+                                this.ShowToastNotification(new ToastNotification("Information", "You need to write Date of Birth in BasicInfo field! FORMAT: (Datum rođenja: DD.MM.YYYY.)!", NotificationType.Information));
+                            }
+                            else
+                            {
+                                //Console.WriteLine(playerInfo.FullName + playerInfo.JerseyNumber.ToString());
+                                foreach (Player pl in TempPlayers)
+                                {
+                                   
 
+                                    
+                                    if (playerInfo == pl)
+                                    {
+                                         int index = AdminMainWindow.adminMainWindow.Players.IndexOf(playerInfo);
+                                        AdminMainWindow.adminMainWindow.Players.Remove(pl);
+
+                                        AdminMainWindow.adminMainWindow.Players.Insert(index,player);
+                                    }
+
+                                }
+
+                            }
+                        }
                     }
+                    else
+                    {
+                        this.ShowToastNotification(new ToastNotification("Error", "Pay attention not to overlap FullName of player or Jersey Number!", NotificationType.Error));
+                        isValid = false;
+                    }
+
+                }
                     else
                     {
                         bool addValid = true;
@@ -489,24 +519,24 @@ namespace HCIPrviProjekat
                     if (isValid)
                     {
 
-                    if (!isAdd)
-                    {
-
-                        if (firstName != player.FullName.Trim().Split(' ')[0] || firstSurname != player.FullName.Trim().Split(' ')[1])
+                        if (!isAdd)
                         {
 
-                            Console.WriteLine("BRISIIII");
+                            if (firstName != player.FullName.Trim().Split(' ')[0] || firstSurname != player.FullName.Trim().Split(' ')[1])
+                            {
 
-                            File.Delete(firstfullPath);
+                                //Console.WriteLine("BRISIIII");
+
+                                File.Delete(firstfullPath);
 
 
+                            }
                         }
-                    }
-                    WriteToRTF(player.FullName.Trim().Split(' ')[0], player.FullName.Trim().Split(' ')[1]);
+                        WriteToRTF(player.FullName.Trim().Split(' ')[0], player.FullName.Trim().Split(' ')[1]);
 
-                    AdminMainWindow.adminMainWindow.Show();
-                        AdminMainWindow.adminMainWindow.ShowToastNotification(new ToastNotification("Success", "Your change has completed successfully", NotificationType.Success));
-                        this.Close();
+                        AdminMainWindow.adminMainWindow.Show();
+                            AdminMainWindow.adminMainWindow.ShowToastNotification(new ToastNotification("Success", "Your change has completed successfully", NotificationType.Success));
+                            this.Close();
                     }
 
                     
@@ -619,34 +649,20 @@ namespace HCIPrviProjekat
                 else
                 {
                     lbErrorJerseyNumber.Text = string.Empty;
-                    tbPlayerJerseyNumEdit.BorderBrush = Brushes.LightSlateGray;
-                    
+                    tbPlayerJerseyNumEdit.BorderBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#04273a"));
+
                 }
 
                 if ((DateOfBirthExtraction() == new DateTime(1900, 1, 1)))
                 {
                     this.ShowToastNotification(new ToastNotification("Information", "You need to write Date of Birth in BasicInfo field! FORMAT: (Datum rođenja: DD.MM.YYYY.)!", NotificationType.Information));
                     isValid = false;
-                    Console.WriteLine(new DateTime(1900, 1, 1).ToString());
+                    //Console.WriteLine(new DateTime(1900, 1, 1).ToString());
                    
                 }
                
 
-                TextRange txtRange = new TextRange(RTBDetails.Document.ContentStart, RTBDetails.Document.ContentEnd);
-                string txt = txtRange.Text;
-
-                if(RTBDetails.Document == null)
-                {
-                    isValid = false;
-                    lbInformationError.Content = "Information field cannot be left empty";
-                    lbInformationError.BorderBrush = Brushes.Red;
-                    
-                }
-                else
-                {
-                    lbInformationError.Content = string.Empty;
-                    lbInformationError.BorderBrush = Brushes.LightSlateGray;
-                }
+                
 
             }
             catch (Exception exc)
@@ -707,7 +723,7 @@ namespace HCIPrviProjekat
                     datum[i] = datum[i].Trim();
                 }
 
-                Console.WriteLine(datum[0] + datum[1] + datum[2]);
+                //Console.WriteLine(datum[0] + datum[1] + datum[2]);
 
                 return new DateTime(Int32.Parse(datum[2]), Int32.Parse(datum[1]), Int32.Parse(datum[0]));
             }
@@ -717,7 +733,7 @@ namespace HCIPrviProjekat
                 return new DateTime(1900,1,1);
             }
 
-            Console.WriteLine(new DateTime(1900, 1, 1).ToString());
+            //Console.WriteLine(new DateTime(1900, 1, 1).ToString());
         }
 
         private void WordCounter(FlowDocument doc)
@@ -728,10 +744,10 @@ namespace HCIPrviProjekat
 
             Regex regex = new Regex(@"\b\w+\b");
 
-            // Brojač reči
+            
             int wordCount = regex.Matches(txt).Count;
             WordsNumber.Text = wordCount.ToString();
-            Console.WriteLine(wordCount.ToString());
+            //Console.WriteLine(wordCount.ToString());
             //return wordCount;
         }
 

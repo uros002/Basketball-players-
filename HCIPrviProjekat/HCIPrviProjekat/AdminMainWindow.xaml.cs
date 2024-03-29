@@ -86,6 +86,11 @@ namespace HCIPrviProjekat
 
             Players = serializer.DeSerializeObject<ObservableCollection<Player>>(@"C:\Users\User\source\repos\HCIPrviProjekat\HCIPrviProjekat\XML\Players.xml");
 
+            if(Players == null)
+            {
+                Players = new ObservableCollection<Player>();
+            }
+
             PlayersDataGrid.ItemsSource = Players;
 
             selectedPlayer = null;
@@ -142,36 +147,43 @@ namespace HCIPrviProjekat
 
         private void BtnDelete_Click(object sender, RoutedEventArgs e)
         {
-            int count = 0;
-            foreach(Player p in Players)
-            {
-                if (p.IsChecked)
-                {
-                    count++;
-                }
-            }
+            MessageBoxResult result = MessageBox.Show("Are you sure you want to delete?", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
-            if(count == 0)
+            if (result == MessageBoxResult.Yes)
             {
-                adminMainWindow.ShowToastNotification(new ToastNotification("Error", "Please check player to delete", NotificationType.Error));
-            }
 
-            List<Player> TempPlayers = Players.ToList();
-            foreach(Player ap in TempPlayers)
-            {
-                if (ap.IsChecked)
+                int count = 0;
+                foreach(Player p in Players)
                 {
-                    this.Players.Remove(ap);
-                    
-                    string filePath = "C:\\Users\\User\\source\\repos\\HCIPrviProjekat\\HCIPrviProjekat\\bin\\Debug\\rtfs\\" + ap.FullName.Trim().Split(' ')[0] + ap.FullName.Trim().Split(' ')[1] + ".rtf";
-                    if (File.Exists(filePath))
+                    if (p.IsChecked)
                     {
+                        count++;
+                    }
+                }
+
+                if(count == 0)
+                {
+                    adminMainWindow.ShowToastNotification(new ToastNotification("Error", "Please check player to delete", NotificationType.Error));
+                }
+
+                List<Player> TempPlayers = Players.ToList();
+                foreach(Player ap in TempPlayers)
+                {
+                    if (ap.IsChecked)
+                    {
+                        this.Players.Remove(ap);
+                    
+                        string filePath = "C:\\Users\\User\\source\\repos\\HCIPrviProjekat\\HCIPrviProjekat\\bin\\Debug\\rtfs\\" + ap.FullName.Trim().Split(' ')[0] + ap.FullName.Trim().Split(' ')[1] + ".rtf";
+                        if (File.Exists(filePath))
+                        {
                         
-                        File.Delete(filePath);
+                            File.Delete(filePath);
                         
+                        }
                     }
                 }
             }
+            
 
         }
 
